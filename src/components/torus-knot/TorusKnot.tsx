@@ -1,33 +1,38 @@
 import { MeshDistortMaterial, MeshWobbleMaterial } from '@react-three/drei'
 import { useFrame, Vector3 } from '@react-three/fiber'
+import { useControls } from 'leva'
 import React, { useRef } from 'react'
 import { Mesh } from 'three'
 
 export const TorusKnot = ({
   position,
-  args,
-  color
-}: {
+  args
+}: // color
+{
   position: Vector3
   args: [
-    radius?: number | undefined,
     tube?: number | undefined,
     radialSegments?: number | undefined,
     tubularSegments?: number | undefined,
     arc?: number | undefined
   ]
-  color: string
+  // color: string
 }) => {
   const ref = useRef<Mesh>(null!)
 
-  // useFrame((state, delta) => {
-  //   ref.current.rotation.x += delta
-  //   ref.current.rotation.y += delta
-  // })
+  const { color, radius } = useControls({
+    color: 'lightblue',
+    radius: {
+      value: 5,
+      min: 1,
+      max: 10,
+      step: 0.5
+    }
+  })
 
   return (
     <mesh position={position} ref={ref}>
-      <torusKnotGeometry args={args} />
+      <torusKnotGeometry args={[radius, ...args]} />
       {/* <meshStandardMaterial color={color} /> */}
       <MeshWobbleMaterial color={color} factor={5} speed={2} />
       {/* <MeshDistortMaterial color={color} /> */}

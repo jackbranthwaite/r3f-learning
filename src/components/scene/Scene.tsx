@@ -2,9 +2,19 @@ import { OrbitControls, useHelper } from '@react-three/drei'
 import React, { Ref, useRef } from 'react'
 import { TorusKnot } from '../torus-knot/TorusKnot'
 import { DirectionalLight, DirectionalLightHelper } from 'three'
+import { useControls } from 'leva'
 
 export const Scene = () => {
   const directionalLightRef = useRef<DirectionalLight>(null!)
+  const { lightColor, lightIntensity } = useControls({
+    lightColor: 'white',
+    lightIntensity: {
+      value: 0.5,
+      min: 0,
+      max: 5,
+      step: 0.1
+    }
+  })
 
   useHelper(directionalLightRef, DirectionalLightHelper, 0.5, 'white')
 
@@ -13,7 +23,8 @@ export const Scene = () => {
       <directionalLight
         ref={directionalLightRef}
         position={[0, 0, 2]}
-        intensity={0.5}
+        intensity={lightIntensity}
+        color={lightColor}
       />
       <ambientLight intensity={0.1} />
       {/* All code for start section involving cubes */}
@@ -30,8 +41,8 @@ export const Scene = () => {
       {/* <Torus position={[2, 0, 0]} args={[0.8, 0.1, 30, 30]} color="blue" />*/}
       <TorusKnot
         position={[0, 0, 0]}
-        args={[1, 0.3, 1000, 50]}
-        color="hotpink"
+        args={[0.3, 1000, 50]}
+        // color="hotpink"
       />
       <OrbitControls enableDamping enableZoom={false} />
     </>
