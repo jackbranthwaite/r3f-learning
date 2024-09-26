@@ -20,12 +20,13 @@ const Home = () => {
       <Cube position={[0, 0, 0]} color="orange" size={[1, 1, 1]} /> */}
       {/* All code for sphere section */}
       <Sphere position={[0, 0, 0]} args={[1, 30, 30]} color="orange" />
-      <Torus position={[2, 0, 0]} args={[0.8, 0.1, 30, 30]} color="blue" />
+      {/* All torus shapes */}
+      {/* <Torus position={[2, 0, 0]} args={[0.8, 0.1, 30, 30]} color="blue" />
       <TorusKnot
         position={[-2, 0, 0]}
         args={[0.5, 0.1, 1000, 50]}
         color="hotpink"
-      />
+      /> */}
     </Canvas>
   )
 }
