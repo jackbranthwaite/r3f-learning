@@ -2,19 +2,18 @@ import { useFrame, Vector3 } from '@react-three/fiber'
 import React, { useRef } from 'react'
 import { Mesh } from 'three'
 
-export const Sphere = ({
+export const TorusKnot = ({
   position,
   args,
   color
 }: {
   position: Vector3
   args: [
-    width?: number | undefined,
-    height?: number | undefined,
-    depth?: number | undefined,
-    widthSegments?: number | undefined,
-    heightSegments?: number | undefined,
-    depthSegments?: number | undefined
+    radius?: number | undefined,
+    tube?: number | undefined,
+    radialSegments?: number | undefined,
+    tubularSegments?: number | undefined,
+    arc?: number | undefined
   ]
   color: string
 }) => {
@@ -25,10 +24,11 @@ export const Sphere = ({
     ref.current.rotation.y += delta
     ref.current.position.z = Math.sin(state.clock.elapsedTime) * 2
   })
+
   return (
     <mesh position={position} ref={ref}>
-      <sphereGeometry args={args} />
-      <meshStandardMaterial color={color} wireframe />
+      <torusKnotGeometry args={args} />
+      <meshStandardMaterial color={color} />
     </mesh>
   )
 }
